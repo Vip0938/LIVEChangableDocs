@@ -3,281 +3,423 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jeremy's Cloud Docs</title>
-    <link rel="icon" href="https://www.clever-cloud.com/app/themes/Starter/assets/img/brand-assets/square-png.png" type="image/png">
+    <title>Library</title>
+    <link rel="icon" href="https://slm-assets.secondlife.com/assets/28107811/lightbox/GuraWink.jpg" type="image/jpeg">
     <style>
-        /* Reset and base styles */
+        /* Global Styles - Dark Theme */
+        :root {
+            --primary-bg: #000000;
+            --secondary-bg: #1a1a1a;
+            --card-bg: #2c2c2e;
+            --text-color: #f5f5f7;
+            --text-secondary: #a1a1a6;
+            --accent-color: #0071e3;
+            --border-color: #333333;
+            --transition-speed: 0.3s;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
-            background-color: #000000;
-            color: #f5f5f7;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
             line-height: 1.47059;
-            font-weight: 400;
             letter-spacing: -0.022em;
-        }
-        
-        /* Header styles */
-        header {
-            background-color: rgba(29, 29, 31, 0.7);
-            backdrop-filter: saturate(180%) blur(20px);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 9999;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 5%;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        
-        .logo {
-            font-weight: 600;
-            font-size: 20px;
-            color: #f5f5f7;
-            text-decoration: none;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 30px;
-        }
-        
-        nav ul li a {
-            color: #f5f5f7;
-            text-decoration: none;
-            font-size: 14px;
-            opacity: 0.8;
-            transition: opacity 0.3s;
-        }
-        
-        nav ul li a:hover {
-            opacity: 1;
-        }
-        
-        /* Hero section */
-        .hero {
-            margin-top: 120px;
-            text-align: center;
-            padding: 80px 20px;
-            max-width: 980px;
-            margin-left: auto;
-            margin-right: auto;
+            min-height: 100vh;
         }
         
         h1 {
-            font-size: 56px;
-            font-weight: 700;
-            letter-spacing: -0.005em;
-            margin-bottom: 10px;
-            background: linear-gradient(90deg, #f5f5f7 0%, #a1a1a6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .subtitle {
-            font-size: 27px;
-            font-weight: 400;
-            margin-bottom: 30px;
-            color: #a1a1a6;
-        }
-        
-        /* Features section */
-        .features {
-            max-width: 1080px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-        
-        .feature-card {
-            background-color: #1d1d1f;
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
-        }
-        
-        .feature-icon {
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #2d2d2f;
-        }
-        
-        .feature-icon svg {
-            width: 60px;
-            height: 60px;
-        }
-        
-        .feature-content {
-            padding: 30px;
-        }
-        
-        .feature-title {
-            font-size: 24px;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            font-size: 1.8rem;
             font-weight: 600;
-            margin-bottom: 15px;
-            color: #f5f5f7;
+            letter-spacing: -0.015em;
+            margin-bottom: 1.5rem;
         }
         
-        .feature-description {
-            font-size: 17px;
-            color: #a1a1a6;
-            line-height: 1.5;
+        /* Layout - Side Navigation + Main Content */
+        .container {
+            display: flex;
+            width: 100%;
         }
         
-        /* CTA section */
-        .cta {
-            text-align: center;
-            padding: 100px 20px;
-            max-width: 680px;
-            margin: 0 auto;
+        /* Side Navigation - Minimalist */
+        .sidebar {
+            width: 220px;
+            background-color: var(--secondary-bg);
+            padding: 2rem 0;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            overflow-y: auto;
+            border-right: 1px solid rgba(255, 255, 255, 0.06);
         }
         
-        .cta-button {
-            display: inline-block;
-            background-color: #0071e3;
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: 980px;
-            font-size: 17px;
+        .logo {
+            padding: 0 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* Search Bar */
+        .search-container {
+            padding: 0 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .search-bar {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            background-color: rgba(255, 255, 255, 0.08);
+            border: none;
+            border-radius: 8px;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .search-bar:focus {
+            background-color: rgba(255, 255, 255, 0.12);
+            outline: none;
+            box-shadow: 0 0 0 2px var(--accent-color);
+        }
+        
+        .search-bar::placeholder {
+            color: var(--text-secondary);
+        }
+        
+        /* Genre List - Minimalist */
+        .sidebar h2 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            padding: 0 1.5rem;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+        
+        #genre-buttons {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .genre-button {
+            background: none;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            font-size: 0.95rem;
             font-weight: 400;
-            text-decoration: none;
-            transition: all 0.3s;
+            color: var(--text-color);
+            text-align: left;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            position: relative;
         }
         
-        .cta-button:hover {
-            background-color: #0077ED;
-            transform: scale(1.05);
+        .genre-button:hover {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.05);
         }
         
-        /* Footer */
-        footer {
-            background-color: #000000;
-            padding: 30px 20px;
+        .genre-button.active {
+            color: white;
+            font-weight: 500;
+        }
+        
+        .genre-button.active::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background-color: var(--accent-color);
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        
+        .no-results {
             text-align: center;
-            font-size: 12px;
-            color: #86868b;
-            border-top: 1px solid #2d2d2f;
+            color: var(--text-secondary);
+            padding: 3rem;
+            font-size: 1rem;
         }
         
-        /* Responsive */
+        /* Image Gallery */
+        #image-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .image-container {
+            display: flex;
+            flex-direction: column;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--card-bg);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: transform var(--transition-speed) ease, 
+                        box-shadow var(--transition-speed) ease;
+        }
+        
+        .image-container:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+        }
+        
+        .image-wrapper {
+            position: relative;
+            width: 100%;
+            /* 64:91 aspect ratio */
+            padding-top: 142.1875%; /* (91/64)*100 */
+            overflow: hidden;
+        }
+        
+        .image-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .image-info {
+            padding: 1.25rem;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            flex-grow: 1;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            #image-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
         @media (max-width: 768px) {
-            h1 {
-                font-size: 42px;
+            .container {
+                flex-direction: column;
             }
             
-            .subtitle {
-                font-size: 22px;
+            .sidebar {
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                padding: 1.5rem;
             }
             
-            nav ul li {
-                margin-left: 15px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 32px;
+            .search-container, .logo {
+                padding: 0;
             }
             
-            .subtitle {
-                font-size: 18px;
+            .sidebar h2 {
+                padding: 0;
+                margin-top: 1.5rem;
             }
             
-            .nav-items {
+            #genre-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                margin-bottom: 1rem;
+            }
+            
+            .genre-button {
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+            }
+            
+            .genre-button.active::before {
                 display: none;
             }
+            
+            .genre-button.active {
+                background-color: var(--accent-color);
+                color: white;
+            }
+            
+            .main-content {
+                padding: 1.5rem;
+            }
+            
+            #image-gallery {
+                grid-template-columns: 1fr;
+            }
         }
+        
+        /* Animation for page load */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .image-container {
+            animation: fadeIn 0.5s ease forwards;
+            opacity: 0;
+        }
+        
+        .image-container:nth-child(1) { animation-delay: 0.1s; }
+        .image-container:nth-child(2) { animation-delay: 0.2s; }
+        .image-container:nth-child(3) { animation-delay: 0.3s; }
+        .image-container:nth-child(4) { animation-delay: 0.4s; }
+        .image-container:nth-child(5) { animation-delay: 0.5s; }
+        .image-container:nth-child(6) { animation-delay: 0.6s; }
     </style>
 </head>
 <body>
-    <header>
-        <a href="#" class="logo">Jeremy's Cloud Docs</a>
-        <nav>
-            <ul class="nav-items">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Features</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <section class="hero">
-        <h1>Jeremy's Cloud Docs</h1>
-        <p class="subtitle">Store, share, and collaborate on documents with elegance and simplicity.</p>
-    </section>
-    
-    <div class="features">
-        <div class="feature-card">
-            <div class="feature-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                    <line x1="10" y1="9" x2="8" y2="9"></line>
-                </svg>
+    <div class="container">
+        <!-- Sidebar with Genre Filter -->
+        <div class="sidebar">
+            <div class="logo">
+                <h1>Image Library</h1>
             </div>
-            <div class="feature-content">
-                <h3 class="feature-title">Smart Documents</h3>
-                <p class="feature-description">Create and edit documents with advanced formatting, styles, and collaborative tools built right in.</p>
+            
+            <div class="search-container">
+                <input type="text" class="search-bar" id="search-input" placeholder="Search images..." autocomplete="off">
             </div>
+            
+            <h2>Categories</h2>
+            <div id="genre-buttons"></div>
         </div>
         
-        <div class="feature-card">
-            <div class="feature-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                </svg>
-            </div>
-            <div class="feature-content">
-                <h3 class="feature-title">Seamless Editor</h3>
-                <p class="feature-description">Access your documents anywhere, anytime. Changes sync automatically across all your devices.</p>
-            </div>
-        </div>
-        
-        <div class="feature-card">
-            <div class="feature-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="9" cy="7" r="4"></circle>
-                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                </svg>
-            </div>
-            <div class="feature-content">
-                <h3 class="feature-title">Collaborative Workspaces</h3>
-                <p class="feature-description">Work together with your team in real-time with powerful commenting and editing tools.</p>
-            </div>
+        <!-- Main Content -->
+        <div class="main-content">
+            <div id="image-gallery"></div>
         </div>
     </div>
-    
-    <section class="cta">
-        <a href="#" class="cta-button">Get Started Today</a>
-    </section>
-    
-    <footer>
-        <p>Copyright © 2025 Jeremy's Cloud Docs. All rights reserved.</p>
-    </footer>
+
+    <script src="images.js"></script>
+    <script src="links.js"></script>
+    <script src="descriptions.js"></script>
+    <script src="genres.js"></script>
+    <script>
+        const gallery = document.getElementById('image-gallery');
+        const genreButtons = document.getElementById('genre-buttons');
+        const searchInput = document.getElementById('search-input');
+        let activeGenre = "All";
+        let searchTerm = "";
+
+        // Create genre buttons with "All" as default
+        const allButton = document.createElement('button');
+        allButton.innerText = "All";
+        allButton.className = 'genre-button active';
+        allButton.onclick = () => filterImages("All");
+        genreButtons.appendChild(allButton);
+        
+        // Add other genre buttons
+        genres.forEach(genre => {
+            if (genre.name !== "All") {
+                const button = document.createElement('button');
+                button.innerText = genre.name;
+                button.className = 'genre-button';
+                button.onclick = () => filterImages(genre.name);
+                genreButtons.appendChild(button);
+            }
+        });
+
+        // Search functionality
+        searchInput.addEventListener('input', function(e) {
+            searchTerm = e.target.value.toLowerCase();
+            filterImages(activeGenre);
+        });
+
+        // Display images for the initial genre
+        displayImages("All");
+
+        function displayImages(selectedGenre) {
+            // First, clear the gallery
+            gallery.innerHTML = '';
+            
+            // Update active button
+            document.querySelectorAll('.genre-button').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.innerText === selectedGenre) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Get images for the selected genre
+            let imagesToDisplay = selectedGenre === "All" ? getAllImages() : genreImages[selectedGenre];
+            
+            // Apply search filter if there's a search term
+            if (searchTerm) {
+                imagesToDisplay = imagesToDisplay.filter(name => {
+                    const baseName = name.split('.')[0];
+                    const desc = descriptions[baseName] || '';
+                    return desc.toLowerCase().includes(searchTerm);
+                });
+            }
+            
+            // Display "No results" message if no images match
+            if (imagesToDisplay.length === 0) {
+                const noResults = document.createElement('div');
+                noResults.className = 'no-results';
+                noResults.textContent = searchTerm 
+                    ? `No images found matching "${searchTerm}"`
+                    : `No images found in the "${selectedGenre}" category`;
+                gallery.appendChild(noResults);
+                return;
+            }
+            
+            // Display images with animation
+            imagesToDisplay.forEach((name, index) => {
+                const container = document.createElement('div');
+                container.className = 'image-container';
+                container.style.animationDelay = `${0.1 * (index % 6)}s`;
+                
+                const link = document.createElement('a');
+                link.href = links[name.split('.')[0]] || '#'; // Use base name for link
+                
+                const imageWrapper = document.createElement('div');
+                imageWrapper.className = 'image-wrapper';
+                
+                const img = document.createElement('img');
+                img.src = `Images/${name}`;
+                img.alt = `Image ${name}`;
+                img.loading = "lazy"; // Lazy loading for better performance
+                
+                const description = document.createElement('p');
+                description.className = 'image-info';
+                description.innerText = descriptions[name.split('.')[0]] || 'No description available';
+                
+                // Append elements
+                imageWrapper.appendChild(img);
+                link.appendChild(imageWrapper);
+                container.appendChild(link);
+                container.appendChild(description);
+                gallery.appendChild(container);
+            });
+        }
+
+        function filterImages(genre) {
+            activeGenre = genre;
+            displayImages(genre);
+        }
+
+        function getAllImages() {
+            // Get unique images across all genres
+            const allImages = new Set();
+            Object.values(genreImages).forEach(images => {
+                images.forEach(img => allImages.add(img));
+            });
+            return Array.from(allImages);
+        }
+    </script>
 </body>
 </html>
